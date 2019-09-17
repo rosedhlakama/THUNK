@@ -5,46 +5,38 @@ import { fetchPosts } from '../actions'
 class LoadSubreddit extends React.Component {
   constructor(props) {
     super(props)
-    this.state={
+    this.state = {
       subreddit: ''
     }
   }
   handleChange = (e) => {
-     subreddit = e.target.value
-    }
+    this.setState({
+      subreddit: e.target.value
+    })
   }
 
+
   render() {
-    let { children, dispatch } = this.props
-    return (
+   return (
       <div>
-        <form>
+     
           <p>
-            <input type='text' name='subreddit' placeholder='search region' onChange={this.handleChange} />
+            <input type='text' name='subreddit' placeholder='search region' onChange={this.handleChange}></input>
           </p>
 
-
-          <button onClick={() => dispatch(fetchPosts('newzealand'))}>
+          <button onClick={() => this.props.dispatch(fetchPosts(this.state.subreddit))}>
             Fetch Posts
     </button>
-
-        </form>
-
-        {children}
+        {this.props.children}
       </div>
     )
   }
+}
 
+function mapStateToProps(state) {
+  return {
+    errorMessage: state.errorMessage
+  }
+}
 
-
-// const LoadSubreddit = ({children, dispatch}) => (
-
-//   <div>
-//     <button onClick={() => dispatch(fetchPosts('newzealand'))}>
-//       Fetch Posts
-//     </button>
-//     {children}
-//   </div>
-// )
-
-export default connect()(LoadSubreddit)
+export default connect(mapStateToProps)(LoadSubreddit)

@@ -8,7 +8,8 @@ const Subreddit = ({subreddits}) => (
     {subreddits.map((post, i) =>
       <Post
         key={i}
-        title={post.title}
+        post={post
+        }
       />
     )}
   </div>
@@ -20,6 +21,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(Subreddit)
+export default connect(mapStateToProps)(Subreddit)
